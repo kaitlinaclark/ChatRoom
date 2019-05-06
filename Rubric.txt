@@ -1,0 +1,33 @@
+Description:
+A proximity based mini-social media website. Users will only be able to see other users that are within a certain radius of them, and will only be able to communicate with these people. 
+Users will be able to brodcast videos to one another. This will be built using a React framework on the front end and Node.js and Socket on the backend, and Google API.
+
+
+
+Grading:
+We will be grading the following aspects of your work. There are 100 points total.
+Assignments (including code) must be committed to Bitbucket by the end of class on the due date (commit early and often). Failing to commit by the end of class on the due date will result in a 0.
+Chats and Google API (25 Points):
+Use Google geocoding to find list of places surround a person’s current location (geolocation) (15 points)
+Join chat available in area (5 points)
+Basic messaging functionality supported in chat (5 points)
+User Management (35 Points):
+Ability to search friends based on username (2 points)
+Ability to send a friend request (2 points)
+Ability to accept a friend request (2 points)
+Ability send private messages to friends (5 points)
+New users can register (3 points)
+Passwords are hashed, salted, and checked securely (2 points)
+Users can log out (3 points)
+Users can delete account (3 points)
+A user can edit their user info (8 points)
+
+Video broadcasting to people in your location (25 points)
+Creative Project Description (5 Points):
+Best Practices (5 Points):
+Code is well formatted and easy to read, with proper commenting (2 points)
+Code passes HTML validation (2 points)
+node_modules folder is ignored by version control (1 points)
+Creative Portion (10 Points)
+
+Approved by Jordie Chisam 11/14
