@@ -4,4 +4,4 @@
 
 
 
-* Waiting for approval to publish code
+Waiting for approval to publish code
