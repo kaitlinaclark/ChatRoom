@@ -11,153 +11,137 @@
     <title>Chat Room</title>
     <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
     <!--JQuery-->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
    
-    <!--<script type="text/javascript" src="index.js"></script>-->
+    <script type="text/javascript" src="chat.js"></script>
 
 </head>
 <!--Template from https://getbootstrap.com/docs/4.0/examples/sign-in/-->
 <body>
-<div class="container-fluid">
-    <nav class="navbar navbar-light bg-light navbar-expand-md">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-               <!-- <li class="active nav-item">
-                    <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a></li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" id="login">
-                        Change Username?
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" id="create">
-                        Create New Chat
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" id="out">
-                        Sign Out
-                    </a>
-                </li>-->
-                <li class="nav-item">
-                    <a href="#" class="nav-link" id="join">
-                        Join
-                    </a>
-                </li>                      
-            </ul>
-        </div>
-    </nav>
-<div class="row">
-    <div class="col-md-4" id="left">
-        <div class="text-center">
-            <!--USER SIGN IN-->
-            <form class="form-signin" id="user">
-                <!--<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-                <h1 class="h3 mb-3 font-weight-normal">Please Enter Username</h1>
-                <label for="input_name" class="sr-only">Username</label>
-                <input type="text" id="name" class="form-control" placeholder="Enter Name" required autofocus>
-                <!--<label for="input_chat" class="sr-only">Chat Name</label>
-                <input type="text" id="chat" class="form-control" placeholder="Enter Chat Name" required>-->
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Enter Username</button>
-            </form>
+    <div class="container-fluid">
+        <header class="row">
+            <nav class="navbar navbar-light bg-light navbar-expand col-12">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active nav-item">
+                            <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" id="login">Change Username?</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" id="create">Create New Chat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" id="out">Sign Out</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" id="join">Join</a>
+                        </li>                      
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="row">
+            <div class="col-md-4" id="left">
+                <div class="text-center">
+                    <!--USER SIGN IN-->
+                    <form class="form-signin" id="user">
+                        <h1 class="h3 mb-3 font-weight-normal">Please Enter Username</h1>
+                        <label for="input_name" class="sr-only">Username</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter Name" required autofocus>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Enter Username</button>
+                    </form>
 
 
-            <!--MAKE NEW CHAT ROOM: displayed after person signs in-->
-            <form class="form-signin" id="new_room" style="display:none">
-                <!--<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-                <h1 class="h3 mb-3 font-weight-normal" id="menu_msg">Create a New Chat</h1>
-                <label for="input_name" class="sr-only">Room Name</label>
-                <input type="text" id="room" name="room" class="form-control" placeholder="Enter Room Name" required autofocus>
-                <p class="form2">
-                    <input type="radio" name="stat" value="Private" id="priv"/>
-                    <label for="priv">Private</label>
-                </p>
-                <p class="form2">
-                    <input type="radio" name="stat" value="Public" id="pub"/>
-                    <label for="pub">Public</label>
-                </p>
-                <!--<label for="input_chat" class="sr-only">Chat Name</label>
-                <input type="text" id="chat" class="form-control" placeholder="Enter Chat Name" required>-->
-    
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Create New Chat</button>
-            </form>
-        </div>
-		<div></div>
-        <!--DISPLAY Current Users IN CHAT-->
-        <div class="user_panel" name="chat__sidebar" style="display:none">
-            <h3>Current Users</h3>
-            <div id="users"></div>
-        </div>
-		<div></div>
-        <div id="chats" style="display:none">
-            <div class="text-center">
-                <h3>Available Chats</h3>
-                <form class="form-signin" id="join_chat">
+                    <!--MAKE NEW CHAT ROOM: displayed after person signs in-->
+                    <form class="form-signin" id="new_room" style="display:none">
+                        <h1 class="h3 mb-3 font-weight-normal" id="menu_msg">Create a New Chat</h1>
+                        <label for="input_name" class="sr-only">Room Name</label>
+                        <input type="text" id="room" name="room" class="form-control" placeholder="Enter Room Name" required autofocus>
+                        <p class="form2">
+                            <input type="radio" name="stat" value="Private" id="priv"/>
+                            <label for="priv">Private</label>
+                        </p>
+                        <p class="form2">
+                            <input type="radio" name="stat" value="Public" id="pub"/>
+                            <label for="pub">Public</label>
+                        </p>
+            
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Create New Chat</button>
+                    </form>
+                </div>
+                <div></div>
+                <!--DISPLAY Current Users IN CHAT-->
+                <div class="user_panel" name="chat__sidebar" style="display:none">
+                    <h3>Current Users</h3>
+                    <div id="users"></div>
+                </div>
+                <div></div>
+                <div id="chats" style="display:none">
+                    <div class="text-center">
+                        <h3>Available Chats</h3>
+                        <form class="form-signin" id="join_chat">
+                            
+                            
+                        </form>
+                        <button class="btn btn-lg btn-primary btn-block" id="join_button">Join Chat</button>
+                    </div>
                     
-                    
-                </form>
-                <button class="btn btn-lg btn-primary btn-block" id="join_button">Join Chat</button>
+                </div>
+
+            </div>
+
+            <div class="col-md-8">Chat Log
+                <div id="chatlog" class="mess" style="text-align: left"></div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-8">  
+                <div class="chat_window" name="chat__main" style="display:none">
+                <p>Send Form || Msg: Click on chat name to join</p>
+                    <div class="chat_footer">
+                        <form id="chat_input">
+                            <input name="message" type="text" placeholder="Enter message here." autocomplete="off"/>
+                            <button id='chat_button'>Send</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="kick_window" name="kick" style="display:none">
+                <p>Kick User Here</p>
+                    <div class="chat_footer">
+                        <form id="chat_input">
+                            <input name="kickname" type="text" placeholder="Enter UserName Here." autocomplete="off"/>
+                            <button id='kick_button'>Send</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="unkick_window" name="unkick" style="display:none">
+                <p>UnKick User Here</p>
+                    <div class="chat_footer">
+                        <form id="chat_input">
+                            <input name="unkickname" type="text" placeholder="Enter UserName Here." autocomplete="off"/>
+                            <button id='unkick_button'>Send</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="ban_window" name="ban" style="display:none">
+                <p>Ban User Here</p>
+                    <div class="chat_footer">
+                        <form id="chat_input">
+                            <input name="banname" type="text" placeholder="Enter UserName here." autocomplete="off"/>
+                            <button id='ban_button'>Send</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             
         </div>
 
     </div>
-	
-	
-	
-     <div class="col-md-8">Chat Log
-        <div id="chatlog" class="mess" style="text-align: left"></div>
-    </div>
-    <div class="col-md-4"></div>
-    <div class="col-md-8">
-        
-        <div class="chat_window" name="chat__main" style="display:none">
-		<p>Send Form || Msg: Click on chat name to join</p>
-            <div class="chat_footer">
-                <form id="chat_input">
-                    <input name="message" type="text" placeholder="Enter message here." autocomplete="off"/>
-                    <button id='chat_button'>Send</button>
-                </form>
-            </div>
-        </div>
-		
-		<div class="kick_window" name="kick" style="display:none">
-		<p>Kick User Here</p>
-            <div class="chat_footer">
-                <form id="chat_input">
-                    <input name="kickname" type="text" placeholder="Enter UserName Here." autocomplete="off"/>
-                    <button id='kick_button'>Send</button>
-                </form>
-            </div>
-        </div>
-		
-		<div class="unkick_window" name="unkick" style="display:none">
-		<p>UnKick User Here</p>
-            <div class="chat_footer">
-                <form id="chat_input">
-                    <input name="unkickname" type="text" placeholder="Enter UserName Here." autocomplete="off"/>
-                    <button id='unkick_button'>Send</button>
-                </form>
-            </div>
-        </div>
-		
-		<div class="ban_window" name="ban" style="display:none">
-		<p>Ban User Here</p>
-            <div class="chat_footer">
-                <form id="chat_input">
-                    <input name="banname" type="text" placeholder="Enter UserName here." autocomplete="off"/>
-                    <button id='ban_button'>Send</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-</div>
-
-</div>
-
 
 <!--CODE-->
 <!-- adds jquery FIRST-->
