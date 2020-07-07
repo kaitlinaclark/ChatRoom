@@ -44,33 +44,53 @@
             </nav>
         </header>
         <div class="row">
-            <div class="col-md-4" id="left">
-                <div class="text-center">
-                    <!--USER SIGN IN-->
-                    <form class="form-signin" id="user">
-                        <h1 class="h3 mb-3 font-weight-normal">Please Enter Username</h1>
-                        <label for="input_name" class="sr-only">Username</label>
-                        <input type="text" id="name" class="form-control" placeholder="Enter Name" required autofocus>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Enter Username</button>
-                    </form>
-
-
-                    <!--MAKE NEW CHAT ROOM: displayed after person signs in-->
-                    <form class="form-signin" id="new_room" style="display:none">
-                        <h1 class="h3 mb-3 font-weight-normal" id="menu_msg">Create a New Chat</h1>
-                        <label for="input_name" class="sr-only">Room Name</label>
-                        <input type="text" id="room" name="room" class="form-control" placeholder="Enter Room Name" required autofocus>
-                        <p class="form2">
-                            <input type="radio" name="stat" value="Private" id="priv"/>
-                            <label for="priv">Private</label>
-                        </p>
-                        <p class="form2">
-                            <input type="radio" name="stat" value="Public" id="pub"/>
-                            <label for="pub">Public</label>
-                        </p>
-            
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Create New Chat</button>
-                    </form>
+		<!--USER SIGN IN-->
+		<div class="card" id="left">
+		<article class="card-body">
+			<h4 class="card-title text-center mb-4 mt-1">Login</h4>
+			<hr>
+			<!--<p class="text-success text-center">Some message goes here</p>-->
+			<form id="user">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+		    					<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 				</div>
+						<input id="name" class="form-control" placeholder="Username" type="text" required>
+					</div> 
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Submit" class="btn btn-primary btn-block">
+				</div>
+			</form>
+		</article>
+		</div>
+                    
+		<!--MAKE NEW CHAT ROOM: displayed after person signs in-->
+		<div class="card" id="left">
+		<article class="card-body">
+			<h4 class="card-title text-center mb-4 mt-1" id="menu_msg">Create New Chat</h4>
+			<hr>
+			<!--<p class="text-success text-center">Some message goes here</p>-->
+			<form id="new_room" style="display:none">
+				<div class="form-group">
+					<div class="input-group">
+						<input id="room" name="room" class="form-control" placeholder="Enter Room Name" type="text" required>
+					</div> 
+				</div>
+				<div class="form-group">
+					<label>Private</label>
+					<input type="radio" name="stat" value="Private" id="priv"/>
+					
+					<label>Public</label>
+					<input type="radio" name="stat" value="Public" id="pub"/>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Submit" class="btn btn-primary btn-block">
+				</div>
+			</form>
+		</article>
+		</div>
                 </div>
                 <div></div>
                 <!--DISPLAY Current Users IN CHAT-->
