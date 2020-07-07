@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en"> 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,158 +9,458 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
     <title>Chat Room</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+    <!--JQuery-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+
 </head>
 <body>
-    <div class="container-fluid">
-        <header class="row">
-            <nav class="navbar navbar-light bg-light navbar-expand col-12">
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active nav-item">
-                            <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" id="login">Change Username?</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" id="create">Create New Chat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" id="out">Sign Out</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" id="join">Join</a>
-                        </li>                      
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <div class="row">
-		<!--USER SIGN IN-->
-		<div class="card">
-		<article class="card-body">
-			<h4 class="card-title text-center mb-4 mt-1">Login</h4>
-			<hr>
-			<!--<p class="text-success text-center">Some message goes here</p>-->
-			<form id="user">
-				<div class="form-group">
-					<div class="input-group">
-						<div class="input-group-prepend">
-		    					<span class="input-group-text"> <i class="fa fa-user"></i> </span>
-		 				</div>
-						<input id="name" class="form-control" placeholder="Username" type="text" required>
-					</div> 
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Submit" class="btn btn-primary btn-block">
-				</div>
-			</form>
-		</article>
-		</div>
-                    
-		<!--MAKE NEW CHAT ROOM: displayed after person signs in-->
-		<div class="card" id="left">
-		<article class="card-body">
-			<h4 class="card-title text-center mb-4 mt-1" id="menu_msg">Create New Chat</h4>
-			<hr>
-			<!--<p class="text-success text-center">Some message goes here</p>-->
-			<form id="new_room" style="display:none">
-				<div class="form-group">
-					<div class="input-group">
-						<input id="room" name="room" class="form-control" placeholder="Enter Room Name" type="text" required>
-					</div> 
-				</div>
-				<div class="form-group">
-					<label>Private</label>
-					<input type="radio" name="stat" value="Private" id="priv"/>
-					
-					<label>Public</label>
-					<input type="radio" name="stat" value="Public" id="pub"/>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Submit" class="btn btn-primary btn-block">
-				</div>
-			</form>
-		</article>
-		</div>
-                </div>
-                <div></div>
-                <!--DISPLAY Current Users IN CHAT-->
-                <div class="user_panel" name="chat__sidebar" style="display:none">
-                    <h3>Current Users</h3>
-                    <div id="users"></div>
-                </div>
-                <div></div>
-                <div id="chats" style="display:none">
-                    <div class="text-center">
-                        <h3>Available Chats</h3>
-                        <form class="form-signin" id="join_chat">
-                            
-                            
-                        </form>
-                        <button class="btn btn-lg btn-primary btn-block" id="join_button">Join Chat</button>
-                    </div>
+<div class="container-fluid">
+    <!--Navigation Bar-->
+    <header id="navbar" class="row">
+        <nav class="navbar navbar-expand navbar-light bg-light col-12">
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav">
+                    <li><a href="#" class="nav-link" id="home">Home</a></li>
+                    <li><a href="#" class="nav-link" id="createchat">Create Chat</a></li>
+                    <li><a href="#" class="nav-link" id="joinchat">Join Chat</a></li>  
+                    <li><a href="#" class="nav-link" id="signout">Sign Out</a></li>                   
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="row">
+        <!--USER SIGN IN-->
+        <div class="justify-content-center align-items-center w-100 h-100" id="user">
+            <div class="card col-6 mx-auto my-auto" >
+                <article class="card-body">
+                    <h4 class="card-title text-center mb-4 mt-1">Please Enter Username</h4>
+                    <hr>
+                    <p class="text-danger text-center" id="username__error"></p>
+                    <form >
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                    </div>
+                                <input id="name" class="form-control" placeholder="Username" type="text" required>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                        </div>
+                    </form>
+                </article>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+        <!--CHAT LAYOUT-->
+            <!--side panel-->
+            <!--display available chats-->
+            <div id="avail-chats" >
+                <div class="text-center">
+                    <h3>Available Chats</h3>
+                    <hr>
+                    <form id="join_chat">
+                        <div class="form-group">
+                            <input type="radio" name="chats" value="Chat Name" id="chat_id" />
+                            <label>Chat Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="radio" name="chats" value="Chat Name" id="chat_id" />
+                            <label>Chat Name</label>
+                        </div>
+                        <input type="submit" value="Join Chat" class="btn btn-lg btn-primary btn-block" id="join_button">
+                    </form>
                     
                 </div>
-
             </div>
-
-            <div class="col-md-8">Chat Log
-                <div id="chatlog" class="mess" style="text-align: left"></div>
-            </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-8">  
-                <div class="chat_window" name="chat__main" style="display:none">
-                <p>Send Form || Msg: Click on chat name to join</p>
-                    <div class="chat_footer">
-                        <form id="chat_input">
-                            <input name="message" type="text" placeholder="Enter message here." autocomplete="off"/>
-                            <button id='chat_button'>Send</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div class="kick_window" name="kick" style="display:none">
-                <p>Kick User Here</p>
-                    <div class="chat_footer">
-                        <form id="chat_input">
-                            <input name="kickname" type="text" placeholder="Enter UserName Here." autocomplete="off"/>
-                            <button id='kick_button'>Send</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div class="unkick_window" name="unkick" style="display:none">
-                <p>UnKick User Here</p>
-                    <div class="chat_footer">
-                        <form id="chat_input">
-                            <input name="unkickname" type="text" placeholder="Enter UserName Here." autocomplete="off"/>
-                            <button id='unkick_button'>Send</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div class="ban_window" name="ban" style="display:none">
-                <p>Ban User Here</p>
-                    <div class="chat_footer">
-                        <form id="chat_input">
-                            <input name="banname" type="text" placeholder="Enter UserName here." autocomplete="off"/>
-                            <button id='ban_button'>Send</button>
-                        </form>
-                    </div>
-                </div>
+            <!--MAKE NEW CHAT ROOM: displayed after person signs in-->
+            <div class="card align-items-center" id="new_room" >
+                <article class="card-body">
+                    <h4 class="card-title text-center mb-4 mt-1" id="menu_msg">Create New Chat</h4>
+                    <hr>
+                    <!--<p class="text-success text-center">Some message goes here</p>-->
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input id="room" name="room" class="form-control" placeholder="Enter Room Name" type="text" required>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                            <input type="radio" name="stat" value="Private" id="priv"/>
+                            <label>Private</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="radio" name="stat" value="Public" id="pub"/>
+                            <label>Public</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                        </div>
+                    </form>
+                </article>
             </div>
             
+            <!--DISPLAY Current Users IN CHAT-->
+            <div id="user_panel">
+                <h3>Current Users</h3>
+                <hr>
+                <div id="users">
+                    <!-- User Format -->
+                    <div class="w-100"> Penelope 
+                        <span>
+                            <button class="badge btn btn-warning" id="user-id">Kick</button>
+                            <button class="badge btn btn-danger" id="user-id">Ban</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
+        <!--chat space-->
+        <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12" id="chat_window" >
+            <div class="row justify-content-center"><h1 class="chat-name">Chat Name Here </h1></div>
+            <!--In a Chat: chat log-->
+            <div class="row overflow-auto" id="chatlog"> 
+                <div class="card w-100">
+                    <h5 class="card-title">Henry</h5>
+                    <div class="card-body">
+                        What's up yall?
+                    </div>
+                </div>
+            
+            </div>
+        
+       
+            <!--MESSAGE DISPLAY-->
+            <div class="row position-absolute fixed-bottom">
+                
+                <div class="input-group" id="chat_input">
+                    <input type="text" id="room" name="message" class="form-control" placeholder="Enter message here" autocomplete="off" />
+                    <span class="input-group-btn"><button class="btn btn-primary" id='chat_button'>Send</button></span>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
+    
+
 
 <!--CODE-->
 <!-- adds jquery FIRST-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!--adds socket.io SECOND-->
-<script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="chat.js"></script>
+<!--adds socket.io SECOND
+<script src="/socket.io/socket.io.js"></script>-->
+<script src="chat.js"></script>
+<!--<script>
+	///////////////////////////////
+	////////Connect to Server//////
+	///////////////////////////////
+	  //Connecting to the server
+      var socket = io('http://ec2-18-220-33-4.us-east-2.compute.amazonaws.com/chat_room');
+      var current_room = "";
+      var username = "";
+	  //Forming the actual connection when prompted
+	  socket.on('connect', function(){
+          console.log('connected to server');
+      });
+
+      /*if username not set, disable
+        - navigation bar
+        - chat layout (class = row)*/
+      if(username === ""){
+        $("#navbar").attr("style", "display:none;");
+        $(".row").attr("style", "display:none;");
+      }
+
+	 /////////////
+	 // SIGN-IN //
+	 /////////////
+	//Regsiter that the enter username button has been pressed
+	$("#user").on('click', function(event){
+        event.preventDefault();
+    
+        console.log("new user name submitted");
+        //Get the text that the user inputted as their name
+        username =  $('#name').val();
+        if(username === ''){
+            console.log('please enter a valid username');
+        }
+        else{
+            //Send the username that the client entered to the server side
+            socket.emit('user_joined', {username: username});
+            //Get all the chats that the user is currently in
+            console.log('username sent to server');
+            //hide username input form
+            $('.user').attr('style', 'display:none;');
+            $("#navbar").attr("style", "display:grid;");
+            //chat layout
+            $('.row').attr('style', 'display:run-in;');
+
+            //hide chat window
+            $(".chat_window").attr("style", "display:none;");
+            //hide current chat users
+            $(".user_panel").attr("style", "display:none;");
+            //hide new room form
+            $("#new_room").attr("style", "display:none;");
+            
+            $("#avail-chats").attr("style", "display:none;");
+
+            //get list of available rooms
+            socket.emit('get_chats');
+        }
+    });
+
+    ////////////////////////
+	// Display All Chats //
+	///////////////////////
+    //display list of chat rooms
+    socket.on("display_chats", function(data){
+        //allow list of avail chats to show
+        $("#avail-chats").attr("style", "display:run-in;");
+        
+
+        console.log("initially avaiable rooms: ", data["rooms"]);
+
+        //append chat choices to join_chat form
+        var output = document.getElementById("join_chat");
+
+        data['rooms'].forEach(function(room){
+            var name = room.room_name;
+            if(name === ""){
+
+            }else{
+
+                var room_button = document.createElement("input");
+                    room_button.setAttribute("type", "radio");
+                    room_button.setAttribute("name", "room");
+                console.log("romm name "+name);
+                    room_button.setAttribute("value", name);
+                
+                output.append(room_button);
+                output.append(name);
+                output.appendChild(document.createElement("br"));
+            }
+        });
+            
+    });	
+
+    //////////////////////
+    // NEW CHAT (CLICK) //
+    //////////////////////
+    $("#create").on("click", (event) => {
+        event.preventDefault();
+
+        //show form for creating chats
+        $("#new_room").attr("style", "display:run-in;")
+    });
+    ////////////////////////////
+	// NEW CHAT FORM (SUBMIT) //
+	////////////////////////////
+    //Take the text from the new room input box and create a new room if possible
+    $('#new_room').on('submit', function(new_room){
+            new_room.preventDefault();
+            //Take in the name of the room
+            var roomname = $('#room').val();
+            //Check to see if the client requested a public or private room
+            var public_or_private = $('input[name=stat]:checked').val();
+            
+            if(roomname ==='' || public_or_private === ''){
+                console.log('please enter valid values for room name. Choose public or private chat');
+            }
+            else{
+                //Create a new public room
+                    if(public_or_private === "Public"){
+                    socket.emit('new_room',
+                        {
+                            roomname: roomname,
+                            public: true,
+                            password: ''
+                            });
+                    }
+                    //Create a new private room
+                    else{
+                    var password = prompt('Please set a password');
+                    if((password==='')){
+                        prompt('unable to make chat because password not set');
+                    }
+                    else{
+                        //establish current room
+                        current_room = roomname;
+                        socket.emit('new_room',
+                        {
+                            roomname: roomname,
+                            public: false,
+                            password: password
+                            });
+                    }
+                    
+                    }
+                
+                console.log('request to join room '+roomname+' sent to server');
+                //dispaly current users
+                $('.user_panel').attr('style', 'display:grid;');
+                
+                //display kick
+                $('.kick_window').attr('style', 'display:grid;');
+                // display unkick
+                $('.unkick_window').attr('style', 'display:grid;');
+                //display ban
+                $('.ban_window').attr('style', 'display:grid;');
+                //hide input for username
+                $('#new_room').attr('style', 'display:none;');
+            }
+            
+            //reset form for joining a room
+            $('[name=name]').val('');
+            $('[name=room]').val('');
+            
+            //hide form
+            $("#new_room").attr("style", "display:none;");
+        });
+    ///////////////////////
+    // JOIN CHAT (CLICK) //
+    ///////////////////////
+    $("#join_button").on("click", function(event){
+        event.preventDefault();
+        
+        //get roomname selected
+        var room_selected = $('input[name=room]:checked').val();
+
+        /*while(room_selected ===''){
+            alert('Choose one of the listed chats.');
+        }*/
+		//Join chat room
+        socket.emit('join_room', {roomname: room_selected});
+        var room_selected = $('input[name=room]:checked').val("");
+        console.log("request sent to join room");
+                     
+    });
+
+    /////////////////////
+    // ENTER/JOIN CHAT //
+    /////////////////////
+    socket.on("joined_room", function(data){
+        //hide join chat form
+        $("#avail-chats").attr("style", "display:none;");
+
+        //clear chatlog of previous dialog
+        $("#chatlog").val("");
+        //display chatlog
+        $('#chatlog').attr('style', 'display:grid;');
+        var u = data["username"];
+        var r = data["room"];
+        current_room = r;
+        $("#chatlog").append('<hr>');
+			var output = document.createTextNode(u+' has joined '+r);
+				   
+            $('#chatlog').append(output);
+        //display name of chat
+        $(".chat-name").val(r);
+
+    });
+    socket.on("did_not_join", function(){
+        current_room = "";
+        console.log("current_room reset to default. User did not join chat");
+    })
+	  	
+	
+	/////////////////////////////////
+	///////////Updating Users////////
+	/////////////////////////////////
+    // Update tbe list of users in a room
+    socket.on('update_users', function(allUsers){
+        console.log('List all Users: ', allUsers);
+        var output = $('<div></div>');
+        allUsers.forEach(function(user){
+            var text = document.createTextNode(user.username);
+            output.append('<hr>').append(text);
+        });
+        $('#users').html(output);
+    });
+			
+	///////////////////////////
+	// Send Message (SUBMIT) //
+	///////////////////////////
+    //take input from the chat text box
+    $('#chat_button').on('click', function(messageSent){
+        messageSent.preventDefault();
+        // send the input from the chat textbox to the server
+        var txt = $('[name=message]').val();
+        console.log("before msg, current room "+current_room);
+        socket.emit('message_to_server', {text: txt, room: current_room});
+        $('[name=message]').val('');
+    });
+		
+		
+	/////////////////////////////
+	// Kick User Form (SUBMIT) //
+	/////////////////////////////
+	$('#kick_button').on('click', function(username){
+        username.preventDefault();
+        // send the input from the chat textbox to the server
+        socket.emit('kick',{kickname: $('[name=kickname]').val()});
+        $('[name=kickname]').val('');
+    });
+				   
+	///////////////////////////////
+	// UnKick User FORM (SUBMIT) //
+	///////////////////////////////
+    $('#unkick_button').on('click', function(username){
+        username.preventDefault();
+        // send the input from the chat textbox to the server
+        socket.emit('unkick',{unkickname: $('[name=unkickname]').val()});
+        $('[name=unkickname]').val('');
+    });
+				   
+				   
+				   
+	
+	/////////////////////////////
+	// Ban User FORM (SUBMIT) //
+	////////////////////////////
+	 $('#ban_button').on('click', function(username){
+        username.preventDefault();
+        // send the input from the chat textbox to the server
+        socket.emit('ban',{banname: $('[name=banname]').val()});
+        $('[name=banname]').val('');
+    });	
+	
+	
+	/////////////////
+	// GET MESSAGE //
+	/////////////////
+    socket.on('message_to_client', function(data){
+        console.log('new message', data['message']);
+            
+        $("#chatlog").append('<hr>');
+        var output = document.createTextNode(data['username']+' says: '+data['message']);
+            
+        $('#chatlog').append(output);
+    });
+				
+		// socket.on('getPassword', function(){
+		//    var pass = prompt('Enter password for chat room');
+		//    socket.emit('gotPassword', {password: pass});
+		// });
+				
+		
+		
+		
+		
+	/////////////////////////////
+	////////Leave Chat///////////
+	////////////////////////////
+	//Disconnecting from the server when prompted.
+    socket.on('disconnect', function(){
+        console.log('disconnected from server');    
+    });
+				 
+	
+  </script>-->
+
 </body>
 </html>
